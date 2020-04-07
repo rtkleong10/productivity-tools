@@ -5,10 +5,9 @@ from .models import Activity, ActivityEvent
 class ActivityAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'description',
         'frequency',
         'user',
-        'last_event_date_time',
+        'last_event_date',
         'days_since',
         'is_frequency_exceeded',
     )
@@ -23,5 +22,5 @@ class ActivityEventAdmin(admin.ModelAdmin):
     list_display = (
         'activity',
         'event_type',
-        'date_time',
+        'date',
     )
