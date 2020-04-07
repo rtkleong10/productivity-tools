@@ -1,0 +1,58 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Days Since{% endblock %}
+
+{% block content %}
+<div class="ui container">
+	<div class="ui hidden divider"></div>
+	<h1>Days Since</h1>
+	<a href="{% url 'registration:logout'%}" class="ui button">Logout</a>
+	<a href="{% url 'registration:profile'%}" class="ui button">
+		<i class="ui user icon"></i>
+		Profile
+	</a>
+	<h2>Activities</h2>
+	<a href="{% url 'web:create-activity'%}" class="ui blue button">
+		<i class="ui plus icon"></i>
+		Create Activity
+	</a>
+	<div class="ui hidden divider"></div>
+	{% if activities %}
+		<table class="ui definition fixed table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Frequency</th>
+					<th>Days Since</th>
+					<th>Today</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for activity in activities %}
+					<tr>
+						<td><a href="{% url 'web:activity-detail' pk=activity.pk %}">{{activity.title}}</a></td>
+						<td>{{activity.frequency_display}}</td>
+						<td>{{activity.days_since}}{% if activity.is_frequency_exceeded %} <i class="ui red exclamation icon"></i>{% endif %}</td>
+						<td>
+							{% if activity.todays_event %}
+								{{activity.todays_event.get_event_type_display}}
+							{% else %}
+								<form style="display: inline;" method="post" action="{% url 'web:complete-activity' pk=activity.pk %}">
+									{% csrf_token %}
+									<button class="ui button green">Complete</button>
+								</form>
+								<form style="display: inline;" method="post" action="{% url 'web:skip-activity' pk=activity.pk %}">
+									{% csrf_token %}
+									<button class="ui button orange">Skip</button>
+								</form>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>No activities found.</p>
+	{% endif %}
+</div>
+{% endblock %}
