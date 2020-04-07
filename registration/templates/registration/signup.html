@@ -1,0 +1,26 @@
+{% extends 'web/base.html' %}
+{% load semanticui %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="ui container">
+	<div class="ui hidden divider"></div>
+	<h1>Sign Up</h1>
+	<div class="ui segment">
+		<form class="ui form" method="post">
+			{% csrf_token %}
+			{% if form.non_field_errors %}
+				<div class="ui segment red">
+					{% for err in form.non_field_errors %}
+						<p class="form-error">{{err}}</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% render_form form %}
+			<button class="ui button" type="submit">Login</button>
+		</form>
+	</div>
+	<p>Already have an account? <a href="{% url 'registration:login' %}">Login here.</a></p>
+</div>
+{% endblock %}

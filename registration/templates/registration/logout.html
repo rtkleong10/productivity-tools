@@ -1,0 +1,11 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="ui container">
+	<div class="ui hidden divider"></div>
+	<h1>You are logged out</h1>
+	<a href="{% url 'registration:login' %}">Back to login page</a>
+</div>
+{% endblock %}
