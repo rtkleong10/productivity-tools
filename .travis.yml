@@ -12,6 +12,7 @@ install:
 before_script:
   - mysql -e 'create database travis_ci_db;'
   - python manage.py migrate
+  - python manage.py collectstatic
 
 script:
   - python manage.py test
