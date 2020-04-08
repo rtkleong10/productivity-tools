@@ -22,19 +22,22 @@ __all__ = [
 ]
 
 class Mixin():
-    def get_context_data(self, **kwargs):
-        """Add the models verbose name to the context dictionary."""
-        kwargs.update({
-            "verbose_name": self.form_class._meta.model._meta.verbose_name,})
-        return super().get_context_data(**kwargs)
+	def get_context_data(self, **kwargs):
+		"""Add the models verbose name to the context dictionary."""
+		kwargs.update({
+			"verbose_name": self.form_class._meta.model._meta.verbose_name,})
+		return super().get_context_data(**kwargs)
 
 @login_required
 @require_http_methods(["GET"])
 def home_view(request):
 	user = request.user
 	activities = Activity.objects.filter(user=user)
+	tzinfo = user.profile.timezone if user.profile else settings.TIME_ZONE
+	today = timezone.localdate(timezone=tzinfo)
 
 	context = {
+		'today': today,
 		'activities': activities,
 	}
 	return render(request, 'web/home.html', context)
