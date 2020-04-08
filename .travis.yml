@@ -1,0 +1,19 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+services: mysql
+
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  - mysql -e 'create database travis_ci_db;'
+  - python manage.py migrate
+  - python manage.py collectstatic
+
+script:
+  - python manage.py runserver &
+  - python manage.py test
