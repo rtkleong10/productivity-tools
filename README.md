@@ -1,5 +1,11 @@
-# Days Since
-- This is a website and API for a Days Since application
+# Productivity Tools
+- This is a website and API for productivity tools
+- The tools include:
+    - Days Since (incomplete)
+    - Habit Tracker (not started)
+    - Progress Bar (not started)
+    
+    
 - It allows you to track when you've last completed an activity, so you know whether you need to do it again soon
 
 ## Resources

@@ -1,5 +1,5 @@
 from django import forms
-from api.models import Activity
+from days_since.models import Activity
 
 class ActivityForm(forms.ModelForm):
 	class Meta:
