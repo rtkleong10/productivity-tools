@@ -1,5 +1,5 @@
 """
-WSGI config for days_since project.
+WSGI config for productivity_tools project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'days_since.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'productivity_tools.settings')
 
 application = get_wsgi_application()

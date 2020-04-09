@@ -41,8 +41,8 @@
 							<td>{{activity.frequency_display}}</td>
 							<td>{{activity.days_since}}</td>
 							<td>
-								<a class="ui button green" href="{% url 'web:complete-activity' activity=activity.pk %}">Complete</a>
-								<a class="ui button orange" href="{% url 'web:skip-activity' activity=activity.pk %}">Skip</a>
+								<a class="ui button green" href="{% url 'days_since:complete-activity' activity=activity.pk %}">Complete</a>
+								<a class="ui button orange" href="{% url 'days_since:skip-activity' activity=activity.pk %}">Skip</a>
 							</td>
 						</tr>
 					{% endfor %}

@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .models import Activity, ActivityEvent
-from .serializers import ActivityListSerializer, ActivityDetailSerializer, ActivityEventListSerializer, ActivityEventDetailSerializer
+from days_since.models import Activity, ActivityEvent
+from days_since.serializers import ActivityListSerializer, ActivityDetailSerializer, ActivityEventListSerializer, ActivityEventDetailSerializer
 
 class ActivityViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
