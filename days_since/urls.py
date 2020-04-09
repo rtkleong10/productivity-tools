@@ -1,32 +1,16 @@
-"""days_since URL Configuration
+from django.urls import path
+from .views import *
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic.base import RedirectView
-
-admin.site.site_header = "Days Since Admin Panel"
-admin.site.site_title = "Days Since Admin Panel"
-admin.site.index_title = "Welcome to the Days Since Admin Panel"
-
-favicon_view = RedirectView.as_view(url='/static/images/favicon/favicon.ico/', permanent=True)
-
+app_name = 'days_since'
 urlpatterns = [
-    path('favicon.ico/', favicon_view),
-    path('api/', include('api.urls')),
-    path('admin/', admin.site.urls),
-    path('', include('registration.urls')),
-    path('', include('web.urls')),
+	path('', home_view, name='home'),
+	path('activities/create/', CreateActivity.as_view(), name='create-activity'),
+	path('activities/<uuid:pk>/edit', UpdateActivity.as_view(), name='update-activity'),
+	path('activities/<uuid:pk>/delete', DeleteActivity.as_view(), name='delete-activity'),
+	path('activities/<uuid:activity>/events/create/', CreateEvent.as_view(), name='create-event'),
+	path('events/<uuid:pk>/edit', UpdateEvent.as_view(), name='update-event'),
+	path('events/<uuid:pk>/delete', DeleteEvent.as_view(), name='delete-event'),
+	path('activities/<uuid:pk>/details', activity_detail, name='activity-detail'),
+	path('activities/<uuid:pk>/complete/', complete_activity, name='complete-activity'),
+	path('activities/<uuid:pk>/skip/', skip_activity, name='skip-activity'),
 ]
