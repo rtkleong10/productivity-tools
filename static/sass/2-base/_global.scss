@@ -9,10 +9,6 @@ html, body {
 	line-height: 1.5;
 	color: $dark-grey;
 	scroll-behavior: smooth;
-
-	@include media-breakpoint-down('md') {
-		font-size: $default-md-size;
-	}
 }
 
 .hidden {

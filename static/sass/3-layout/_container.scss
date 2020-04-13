@@ -9,10 +9,8 @@
 	}
 }
 
-@include media-breakpoint-up('sm') {
-	.grid {
-		display: grid;
-		grid-column-gap: 30px;
-		grid-template-columns: repeat(12, 1fr);
-	}
+.grid {
+    display: grid;
+    grid-column-gap: 30px;
+    grid-template-columns: repeat(12, 1fr);
 }

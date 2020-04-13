@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../font/ubuntu/ubuntu-v13-latin-700.eot'); /* IE9 Compat Modes */
+	src: local('Ubuntu Bold'), local('Ubuntu-Bold'),
+		url('../font/ubuntu/ubuntu-v13-latin-700.eot?#iefix') format('embedded-opentype'),
+		url('../font/ubuntu/ubuntu-v13-latin-700.woff2') format('woff2'),
+		url('../font/ubuntu/ubuntu-v13-latin-700.woff') format('woff'),
+		url('../font/ubuntu/ubuntu-v13-latin-700.ttf') format('truetype'),
+		url('../font/ubuntu/ubuntu-v13-latin-700.svg#Ubuntu') format('svg');
+}

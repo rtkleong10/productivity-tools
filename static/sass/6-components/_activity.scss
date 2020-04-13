@@ -16,6 +16,15 @@
     &:hover, &:focus {
         transform: translateY(-10px);
     }
+
+    @include media-breakpoint-down('md') {
+        display: block;
+
+        > :first-child {
+            margin-right: 0px;
+            margin-bottom: 20px;
+        }
+    }
 }
 
 .progress-circle {
@@ -56,10 +65,7 @@
             left: 50%;
             width: 65px;
             transform: translate(-50%, -50%);
-            font-family: $avenir-next;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 14px;
+            font: $h6-font;
             line-height: 21px;
             text-align: center;
             color: #FFFFFF;
