@@ -2,6 +2,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from web.models import Color
 from django.core.validators import MinValueValidator
 
 class Activity(models.Model):
@@ -39,6 +40,12 @@ class Activity(models.Model):
 		auto_now_add=True,
 	)
 
+	color = models.ForeignKey(
+		help_text='Colour attached to the activity',
+		to=Color,
+		on_delete=models.PROTECT,
+	)
+
 	@property
 	def todays_event(self):
 		tzinfo = self.user.profile.timezone if self.user.profile else settings.TIME_ZONE
@@ -62,6 +69,14 @@ class Activity(models.Model):
 		today = timezone.localdate(timezone=tzinfo)
 		days_since = (today - last_event_date).days
 		return days_since
+
+	@property
+	def days_left(self):
+		return self.frequency - self.days_since
+
+	@property
+	def days_since_percentage(self):
+		return self.days_since / self.frequency
 
 	@property
 	def is_frequency_exceeded(self):
