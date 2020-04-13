@@ -1,0 +1,24 @@
+*, button {
+	&, &:focus, &:active {
+		outline: none;
+	}
+}
+
+html, body {
+	font: $default-font;
+	line-height: 1.5;
+	color: $dark-grey;
+	scroll-behavior: smooth;
+
+	@include media-breakpoint-down('md') {
+		font-size: $default-md-size;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+body .display {
+	display: block;
+}

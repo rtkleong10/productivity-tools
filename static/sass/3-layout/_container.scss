@@ -1,0 +1,18 @@
+/* container */
+.container {
+	margin: 0 auto;
+	width: 80%;
+	max-width: 1300px;
+
+	@include media-breakpoint-down('md') {
+	    width: 90%;
+	}
+}
+
+@include media-breakpoint-up('sm') {
+	.grid {
+		display: grid;
+		grid-column-gap: 30px;
+		grid-template-columns: repeat(12, 1fr);
+	}
+}

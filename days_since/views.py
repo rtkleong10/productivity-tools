@@ -21,18 +21,11 @@ __all__ = [
 	'DeleteEvent',
 ]
 
-class Mixin():
-	def get_context_data(self, **kwargs):
-		"""Add the models verbose name to the context dictionary."""
-		kwargs.update({
-			"verbose_name": self.form_class._meta.model._meta.verbose_name,})
-		return super().get_context_data(**kwargs)
-
 @login_required
 @require_http_methods(["GET"])
 def home_view(request):
 	user = request.user
-	activities = Activity.objects.filter(user=user)
+	activities = sorted(Activity.objects.filter(user=user), key=lambda activity: activity.days_left)
 	tzinfo = user.profile.timezone if user.profile else settings.TIME_ZONE
 	today = timezone.localdate(timezone=tzinfo)
 
@@ -48,6 +41,7 @@ class CreateActivity(LoginRequiredMixin, CreateView):
 		'title',
 		'description',
 		'frequency',
+		'color',
 	)
 	template_name = 'days_since/model_form.html'
 	success_url = reverse_lazy('days_since:home')
@@ -65,6 +59,7 @@ class UpdateActivity(LoginRequiredMixin, UpdateView):
 		'title',
 		'description',
 		'frequency',
+		'color',
 	)
 	template_name = 'days_since/model_form.html'
 	extra_context = {

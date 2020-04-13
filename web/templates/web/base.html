@@ -15,8 +15,10 @@
 	<script type="text/javascript" src="{% static 'js/moment.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'semantic-ui/semantic.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'semantic-ui-calendar/calendar.min.js' %}"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'semantic-ui/semantic.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'semantic-ui-calendar/calendar.min.css' %}">
+	{% block styles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'semantic-ui/semantic.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'semantic-ui-calendar/calendar.min.css' %}">
+	{% endblock %}
 	<title>{% block title %}Days Since{% endblock %}</title>
 </head>
 <body>

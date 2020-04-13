@@ -1,0 +1,68 @@
+.activity-box {
+    background-color: $light-grey;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    text-decoration: none;
+    -webkit-transition: ease-in-out all .3s;
+    transition: ease-in-out all .3s;
+
+    > :first-child {
+        margin-right: 30px;
+    }
+
+    &:hover, &:focus {
+        transform: translateY(-10px);
+    }
+}
+
+.progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: $white;
+    flex-shrink: 0;
+
+    &.overdue .outer-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 98px;
+        width: 98px;
+        background-color: $white;
+        position: absolute;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .inner-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 72px;
+        width: 72px;
+        position: absolute;
+        background: $dark-grey;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+
+        p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 65px;
+            transform: translate(-50%, -50%);
+            font-family: $avenir-next;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 21px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+    }
+}
