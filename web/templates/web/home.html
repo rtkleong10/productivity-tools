@@ -6,6 +6,11 @@
 <div class="ui container">
     <div class="ui hidden divider"></div>
     <h1>Productivity Tools</h1>
+	<div>
+		<a href="{% url 'registration:logout'%}" class="ui button">Logout</a>
+		<a href="{% url 'registration:profile'%}" class="ui button"><i class="ui user icon"></i>Profile</a>
+	</div>
+	<div class="ui hidden divider"></div>
 	<a href="{% url 'days_since:home' %}" class="ui blue button">
 		<i class="ui clock icon"></i>
 		Days Since
