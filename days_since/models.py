@@ -75,10 +75,6 @@ class Activity(models.Model):
 		return self.frequency - self.days_since
 
 	@property
-	def days_since_percentage(self):
-		return self.days_since / self.frequency
-
-	@property
 	def is_frequency_exceeded(self):
 		return self.days_since > self.frequency
 

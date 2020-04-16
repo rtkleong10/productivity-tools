@@ -32,23 +32,23 @@
 			<a class="activity-box" href="{% url 'days_since:activity-detail' pk=activity.pk %}">
 				{% if activity.days_left >= 0 %}
 					<div class="progress-circle">
-						<canvas class="outer-circle" height="100px" width="100px" data-percentage="{{activity.days_since_percentage}}" data-color="{{activity.color.hex_code}}"></canvas>
+						<canvas class="outer-circle" height="120px" width="120px" data-percentage="{{activity.clock_percentage}}" data-color="{{activity.color}}"></canvas>
 						<div class="inner-circle">
-							<p>{{activity.days_left}} days left</p>
+							<p>{{activity.clock_display}}</p>
 						</div>
 					</div>
 				{% else %}
-					<div class="progress-circle overdue" style="background-color: {{activity.color.hex_code}};">
+					<div class="progress-circle overdue" style="background-color: {{activity.color}};">
 						<div class="outer-circle"></div>
 						<div class="inner-circle">
-							<p>{{activity.days_left}} days left</p>
+							<p>{{activity.clock_display}}</p>
 						</div>
 					</div>
 				{% endif %}
 				<div>
 					<div class="mb-20">
 						<h3>{{activity.title}}</h3>
-						<p>{{activity.frequency_display}} • Last done {{activity.days_since}} days ago</p>
+						<p>{{activity.frequency_display}} • {{activity.days_since_display}}</p>
 					</div>
 					{% if activity.todays_event %}
 						{{activity.todays_event.get_event_type_display}}
