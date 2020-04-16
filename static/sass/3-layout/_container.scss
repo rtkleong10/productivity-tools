@@ -1,0 +1,20 @@
+/* container */
+.container {
+	margin: 0 auto;
+	width: 80%;
+	max-width: 1300px;
+
+	@include media-breakpoint-down('md') {
+	    width: 90%;
+	}
+}
+
+.grid {
+    display: grid;
+    grid-column-gap: 30px;
+    grid-template-columns: repeat(12, 1fr);
+
+    @include media-breakpoint-down('sm') {
+	    grid-column-gap: 20px;
+	}
+}
