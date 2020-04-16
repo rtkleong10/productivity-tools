@@ -1,0 +1,26 @@
+// Shadow
+$shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
+
+// Fit Content
+@mixin width-fit-content {
+	width: -moz-fit-content;
+	width: fit-content;
+}
+
+@mixin height-fit-content {
+	height: -moz-fit-content;
+	height: fit-content;
+}
+
+// Limit Lines
+@mixin limit-lines($lines) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	line-clamp: $lines;
+	-webkit-line-clamp: $lines;
+	-moz-line-clamp: $lines;
+	line-height: 30px;
+	max-height: calc(#{$lines} * 30px);
+}

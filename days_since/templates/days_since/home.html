@@ -1,58 +1,114 @@
 {% extends 'web/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.min.css' %}">
+{% endblock%}
 
 {% block title %}Days Since{% endblock %}
 
 {% block content %}
-<div class="ui container">
-	<div class="ui hidden divider"></div>
-	<h1>Days Since</h1>
-	<a href="{% url 'registration:logout'%}" class="ui button">Logout</a>
-	<a href="{% url 'registration:profile'%}" class="ui button">
-		<i class="ui user icon"></i>
-		Profile
-	</a>
-	<h2>Activities</h2>
-	<a href="{% url 'days_since:create-activity'%}" class="ui blue button">
-		<i class="ui plus icon"></i>
-		Create Activity
-	</a>
-	<div class="ui hidden divider"></div>
-	{% if activities %}
-		<table class="ui definition fixed table">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Frequency</th>
-					<th>Days Since</th>
-					<th>Today ({{today}})</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for activity in activities %}
-					<tr>
-						<td><a href="{% url 'days_since:activity-detail' pk=activity.pk %}">{{activity.title}}</a></td>
-						<td>{{activity.frequency_display}}</td>
-						<td>{{activity.days_since}}{% if activity.is_frequency_exceeded %} <i class="ui red exclamation icon"></i>{% endif %}</td>
-						<td>
-							{% if activity.todays_event %}
-								{{activity.todays_event.get_event_type_display}}
-							{% else %}
-								<form style="display: inline;" method="post" action="{% url 'days_since:complete-activity' pk=activity.pk %}">
-									{% csrf_token %}
-									<button class="ui button green">Complete</button>
-								</form>
-								<form style="display: inline;" method="post" action="{% url 'days_since:skip-activity' pk=activity.pk %}">
-									{% csrf_token %}
-									<button class="ui button orange">Skip</button>
-								</form>
-							{% endif %}
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	{% else %}
-		<p>No activities found.</p>
-	{% endif %}
+<div class="container">
+	<div class="mb-20">
+		<h1 class="mb-10">Days Since</h1>
+		<div>
+			<a href="{% url 'web:home' %}" class="btn">
+				<i class="ui chevron left icon"></i>
+				Back to Main Menu
+			</a>
+		</div>
+	</div>
+	<div class="mb-20">
+		<h2 class="mb-10">Activities</h2>
+		<div>
+			<a href="{% url 'days_since:create-activity'%}" class="ui blue btn">
+				<i class="ui plus icon"></i>
+				Create Activity
+			</a>
+		</div>
+	</div>
+	<div class="grid activities">
+		{% for activity in activities %}
+			<a class="activity-box" href="{% url 'days_since:activity-detail' pk=activity.pk %}">
+				{% if activity.days_left >= 0 %}
+					<div class="progress-circle">
+						<canvas class="outer-circle" height="120px" width="120px" data-percentage="{{activity.clock_percentage}}" data-color="{{activity.color}}"></canvas>
+						<div class="inner-circle">
+							<p>{{activity.clock_display}}</p>
+						</div>
+					</div>
+				{% else %}
+					<div class="progress-circle overdue" style="background-color: {{activity.color}};">
+						<div class="outer-circle"></div>
+						<div class="inner-circle">
+							<p>{{activity.clock_display}}</p>
+						</div>
+					</div>
+				{% endif %}
+				<div>
+					<div class="mb-20">
+						<h3>{{activity.title}}</h3>
+						<p>{{activity.frequency_display}} • {{activity.days_since_display}}</p>
+					</div>
+					{% if activity.todays_event %}
+						{{activity.todays_event.get_event_type_display}}
+					{% else %}
+						<form style="display: inline;" method="post" action="{% url 'days_since:complete-activity' pk=activity.pk %}"><!--
+							-->{% csrf_token %}<!--
+							--><button class="btn btn-dark-grey mr-10">Complete</button><!--
+						--></form><!--
+						--><form style="display: inline;" method="post" action="{% url 'days_since:skip-activity' pk=activity.pk %}"><!--
+							-->{% csrf_token %}<!--
+							--><button class="btn btn-white">Skip</button><!--
+						--></form>
+					{% endif %}
+				</div>
+			</a>
+		{% empty %}
+			<p>No activities found.</p>
+		{% endfor %}
+	</div>
 </div>
+<script>
+	$('.progress-circle:not(.overdue) .outer-circle').each(function (i, el) {
+		var width = el.width;
+		var height = el.height;
+		var percentage = $(el).data('percentage');
+		var color = $(el).data('color');
+
+		var ctx = el.getContext('2d');
+		
+		var cx = width / 2;
+		var cy = height / 2;
+
+		const animationTime = 800;
+		var startTime = new Date();
+
+		function draw() {
+			var time = new Date();
+			var timeElapsed = new Date() - startTime;
+			var multiplier = (timeElapsed < animationTime) ? (Math.pow(Math.sin(Math.PI * (timeElapsed / animationTime) / 2), 2)) : 1;
+
+			ctx.globalCompositeOperation = 'destination-over';
+			ctx.clearRect(0, 0, width, height);
+
+			ctx.save();
+
+			ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.moveTo(cx,cy);
+			ctx.arc(cx, cy, width / 2, -Math.PI / 2, -Math.PI / 2 + percentage * 2 * Math.PI * multiplier);
+			ctx.lineTo(cx, cy);
+			ctx.closePath();
+			ctx.fill();
+
+			ctx.restore();
+
+			if (timeElapsed < animationTime)
+				window.requestAnimationFrame(draw);
+		}
+
+		window.requestAnimationFrame(draw);
+	});
+</script>
 {% endblock %}

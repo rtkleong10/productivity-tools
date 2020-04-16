@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'djoser',
     'semanticuiforms',
     'timezone_field',
+    'colorfield',
 
     'registration.apps.RegistrationConfig',
     'days_since',
