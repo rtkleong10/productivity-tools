@@ -45,6 +45,7 @@
         position: absolute;
         border-radius: 50%;
         transform: translate(-50%, -50%);
+        animation: drawProgressCircle 0.8s ease-in-out;
     }
 
     .inner-circle {
@@ -85,4 +86,10 @@
             font-size: $small-size;
         }
     }
+}
+
+@keyframes drawProgressCircle {
+    0% {transform: translate(-50%, -50%) scale(1);}
+    50% {transform: translate(-50%, -50%) scale(0.75);}
+    100% {transform: translate(-50%, -50%) scale(1);}
 }
