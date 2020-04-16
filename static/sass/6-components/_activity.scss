@@ -6,8 +6,7 @@
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
     margin-bottom: 40px;
     text-decoration: none;
-    -webkit-transition: ease-in-out all .3s;
-    transition: ease-in-out all .3s;
+    @include ease-transition;
 
     > :first-child {
         margin-right: 30px;

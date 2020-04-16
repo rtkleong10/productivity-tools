@@ -8,8 +8,7 @@
     display: inline-block;
     font-weight: bold;
     cursor: pointer;
-    -webkit-transition: ease-in-out all .3s;
-    transition: ease-in-out all .3s;
+    @include ease-transition;
 
     &:hover, &:focus {
         opacity: 0.6;
