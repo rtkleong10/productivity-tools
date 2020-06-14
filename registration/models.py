@@ -13,3 +13,6 @@ class UserProfile(models.Model):
         help_text='The timezone to use as reference',
         default='Asia/Singapore',
     )
+
+    def __str__(self):
+        return self.user.username
