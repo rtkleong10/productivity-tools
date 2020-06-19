@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'djoser',
-    'semanticuiforms',
     'timezone_field',
     'colorfield',
     'corsheaders',
