@@ -3,6 +3,8 @@ from .models import Activity, ActivityEvent
 from utils.serializers import ParameterisedHyperlinkedIdentityField
 
 class ActivityListSerializer(serializers.HyperlinkedModelSerializer):
+    color = serializers.IntegerField(source="color.pk", read_only=True)
+
     class Meta:
         model = Activity
         fields = (
@@ -10,9 +12,12 @@ class ActivityListSerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'title',
             'frequency',
-            'is_frequency_exceeded',
+            'last_event_type',
             'days_since',
+            'todays_event',
+            'color',
         )
+
 
 class ActivityDetailSerializer(serializers.ModelSerializer):
     events = ParameterisedHyperlinkedIdentityField(

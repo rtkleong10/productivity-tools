@@ -1,8 +1,0 @@
-.grid.activities > * {
-    grid-column: span 6;
-
-    @include media-breakpoint-down('sm') {
-        margin-bottom: 40px;
-        grid-column: span 12;
-    }
-}
