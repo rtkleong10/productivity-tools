@@ -17,17 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
 
-admin.site.site_header = "Days Since Admin Panel"
-admin.site.site_title = "Days Since Admin Panel"
-admin.site.index_title = "Welcome to the Days Since Admin Panel"
+admin.site.site_header = "Productivity Tools Admin Panel"
+admin.site.site_title = "Productivity Tools Admin Panel"
+admin.site.index_title = "Welcome to the Productivity Tools Admin Panel"
 
 favicon_view = RedirectView.as_view(url='/static/images/favicon/favicon.ico/', permanent=True)
 
 urlpatterns = [
     path('favicon.ico/', favicon_view),
-    path('api/', include('api.urls')),
+    path('api/', include('common.urls')),
+    path('auth/', include('registration.urls')),
     path('admin/', admin.site.urls),
-    path('', include('registration.urls')),
-    path('days-since/', include('days_since.urls')),
-    path('', include('web.urls')),
 ]

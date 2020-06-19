@@ -7,7 +7,7 @@ class ActivityAdmin(admin.ModelAdmin):
         'title',
         'frequency',
         'user',
-        'last_event_date',
+        'last_event_type',
         'days_since',
         'is_frequency_exceeded',
     )
