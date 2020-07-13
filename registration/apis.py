@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import ProfileSerializer
 from .models import UserProfile
 
-class ProfileApi(generics.RetrieveUpdateAPIView):
+class ProfileView(generics.RetrieveUpdateAPIView):
 	permission_classes = [IsAuthenticated]
 	serializer_class = ProfileSerializer
 
