@@ -7,7 +7,7 @@ from common.serializers import ColorSerializer
 from common.models import Color
 
 class ColorViewSet(generics.ListAPIView):
-	queryset = Color.objects.all()
+	queryset = Color.objects.order_by("id")
 	serializer_class = ColorSerializer
 
 class TimezoneViewSet(views.APIView):
