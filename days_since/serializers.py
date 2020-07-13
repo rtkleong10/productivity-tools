@@ -24,10 +24,6 @@ class ActivityDetailSerializer(serializers.ModelSerializer):
         view_name='api:activityevent-list',
         lookup_fields=(('pk', 'activity'),),
     )
-    stats = ParameterisedHyperlinkedIdentityField(
-        view_name='api:activitystats-list',
-        lookup_fields=(('pk', 'activity'),),
-    )
 
     class Meta:
         model = Activity
