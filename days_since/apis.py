@@ -35,13 +35,17 @@ class ActivityViewSet(viewsets.ModelViewSet):
         last_event = None
         total_diff = 0
 
-        for event in recent_events:
-            if last_event != None:
-                total_diff += (last_event.date - event.date).days
+        if len(recent_events) > 1:
+            for event in recent_events:
+                if last_event != None:
+                    total_diff += (last_event.date - event.date).days
 
-            last_event = event
+                last_event = event
 
-        average_frequency = total_diff / (len(recent_events) - 1)
+            average_frequency = total_diff / (len(recent_events) - 1)
+
+        else:
+            average_frequency = None
 
         serializer = ActivityStatsSerializer(data={
             "total_count": activity.events.count(),
