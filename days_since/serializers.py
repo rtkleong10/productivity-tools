@@ -24,6 +24,10 @@ class ActivityDetailSerializer(serializers.ModelSerializer):
         view_name='api:activityevent-list',
         lookup_fields=(('pk', 'activity'),),
     )
+    stats = ParameterisedHyperlinkedIdentityField(
+        view_name='api:activitystats-list',
+        lookup_fields=(('pk', 'activity'),),
+    )
 
     class Meta:
         model = Activity
@@ -45,3 +49,9 @@ class ActivityEventDetailSerializer(serializers.ModelSerializer):
         model = ActivityEvent
         fields = '__all__'
         read_only_fields = ('activity',)
+
+class ActivityStatsSerializer(serializers.Serializer):
+    total_count = serializers.IntegerField(min_value=0)
+    skipped_count = serializers.IntegerField(min_value=0)
+    completed_count = serializers.IntegerField(min_value=0)
+    average_frequency = serializers.FloatField()
