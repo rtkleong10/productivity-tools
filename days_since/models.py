@@ -43,7 +43,7 @@ class Activity(models.Model):
 	)
 
 	color = models.ForeignKey(
-		help_text='Colour attached to the activity',
+		help_text='Colour attached to the activity.',
 		to=Color,
 		on_delete=models.PROTECT,
 	)
