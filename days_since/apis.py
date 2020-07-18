@@ -14,7 +14,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Activity.objects.filter(user=user)
+        return Activity.objects.filter(user=user).order_by('frequency')
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -28,7 +28,8 @@ class ActivityViewSet(viewsets.ModelViewSet):
 
     @action(detail=True)
     def statistics(self, request, pk=None):
-        activity = get_object_or_404(Activity, pk=pk)
+        user = request.user
+        activity = get_object_or_404(Activity, pk=pk, user=user)
 
         # Calculate average frequency
         recent_events = activity.events.order_by("-date")[:ActivityViewSet.NUM_EVENTS_FOR_AVG_FREQ]
@@ -62,8 +63,8 @@ class ActivityEventViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        activity = get_object_or_404(Activity, pk=self.kwargs['activity'])
-        return ActivityEvent.objects.filter(activity=activity, activity__user=user)
+        activity = get_object_or_404(Activity, pk=self.kwargs['activity'], user=user)
+        return ActivityEvent.objects.filter(activity=activity).order_by("-date")
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -72,24 +73,29 @@ class ActivityEventViewSet(viewsets.ModelViewSet):
             return ActivityEventDetailSerializer
 
     def perform_create(self, serializer):
-        activity = self.kwargs['activity']
-        date = serializer.validated_data.get("date")
+        user = self.request.user
+        activity_pk = self.kwargs['activity']
+        get_object_or_404(Activity, pk=activity_pk, user=user)
 
-        other_combi = self.get_queryset().filter(activity=activity, date=date).first()
+        date = serializer.validated_data.get("date")
+        other_combi = self.get_queryset().filter(activity=activity_pk, date=date).first()
 
         if other_combi:
             raise ValidationError(detail={
                 api_settings.NON_FIELD_ERRORS_KEY: ["The fields activity, date must make a unique set."]
             })
 
-        serializer.save(activity=Activity.objects.get(pk=activity))
+        serializer.save(activity=Activity.objects.get(pk=activity_pk))
 
     def perform_update(self, serializer):
+        user = self.request.user
         pk = serializer.instance.pk
-        activity = serializer.instance.activity
+        get_object_or_404(ActivityEvent, pk=pk, activity__user=user)
+
+        activity_pk = serializer.instance.activity
         date = serializer.validated_data.get("date")
 
-        other_combi = self.get_queryset().filter(activity=activity, date=date).exclude(pk=pk).first()
+        other_combi = self.get_queryset().filter(activity=activity_pk, date=date).exclude(pk=pk).first()
 
         if other_combi:
             raise ValidationError(detail={

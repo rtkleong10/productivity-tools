@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'timezone_field',
     'colorfield',
     'corsheaders',
+    'ordered_model',
 
     'registration.apps.RegistrationConfig',
-    'days_since',
     'common',
+    'days_since',
+    'time_cycles',
 ]
 
 MIDDLEWARE = [

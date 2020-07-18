@@ -3,7 +3,7 @@ from .models import Activity, ActivityEvent
 from utils.serializers import ParameterisedHyperlinkedIdentityField
 
 class ActivityListSerializer(serializers.HyperlinkedModelSerializer):
-    color = serializers.IntegerField(source="color.pk", read_only=True)
+    color = serializers.IntegerField(source="color.pk")
 
     class Meta:
         model = Activity

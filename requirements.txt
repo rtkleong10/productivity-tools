@@ -4,6 +4,7 @@ Django==3.0.7
 django-colorfield==0.3.0
 django-cors-headers==3.3.0
 django-heroku==0.3.1
+django-ordered-model==3.4.1
 django-templated-mail==1.1.1
 django-timezone-field==4.0
 djangorestframework==3.11.0
