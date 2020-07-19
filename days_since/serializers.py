@@ -18,7 +18,6 @@ class ActivityListSerializer(serializers.HyperlinkedModelSerializer):
             'color',
         )
 
-
 class ActivityDetailSerializer(serializers.ModelSerializer):
     events = ParameterisedHyperlinkedIdentityField(
         view_name='api:activityevent-list',
@@ -51,3 +50,4 @@ class ActivityStatsSerializer(serializers.Serializer):
     skipped_count = serializers.IntegerField(min_value=0)
     completed_count = serializers.IntegerField(min_value=0)
     average_frequency = serializers.FloatField()
+
