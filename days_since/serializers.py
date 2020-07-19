@@ -20,7 +20,7 @@ class ActivityListSerializer(serializers.HyperlinkedModelSerializer):
 
 class ActivityDetailSerializer(serializers.ModelSerializer):
     events = ParameterisedHyperlinkedIdentityField(
-        view_name='api:activityevent-list',
+        view_name='common:activityevent-list',
         lookup_fields=(('pk', 'activity'),),
     )
 
@@ -30,7 +30,7 @@ class ActivityDetailSerializer(serializers.ModelSerializer):
 
 class ActivityEventListSerializer(serializers.ModelSerializer):
     url = ParameterisedHyperlinkedIdentityField(
-        view_name='api:activityevent-detail',
+        view_name='common:activityevent-detail',
         lookup_fields=(('activity.pk', 'activity'), ('pk', 'pk'))
     )
 
