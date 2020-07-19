@@ -17,7 +17,7 @@ class CycleListSerializer(serializers.HyperlinkedModelSerializer):
 
 class CycleDetailSerializer(serializers.ModelSerializer):
 	timers = ParameterisedHyperlinkedIdentityField(
-		view_name='api:timer-list',
+		view_name='common:timer-list',
 		lookup_fields=(('pk', 'cycle'),),
 	)
 
@@ -27,7 +27,7 @@ class CycleDetailSerializer(serializers.ModelSerializer):
 
 class TimerListSerializer(serializers.ModelSerializer):
 	url = ParameterisedHyperlinkedIdentityField(
-		view_name='api:timer-detail',
+		view_name='common:timer-detail',
 		lookup_fields=(('cycle.pk', 'cycle'), ('pk', 'pk'))
 	)
 
