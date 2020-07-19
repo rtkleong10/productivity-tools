@@ -16,5 +16,5 @@ router.register(r'logout', LogoutView, basename='logout')
 
 app_name = 'registration'
 urlpatterns = [
-	path('', include((router.urls, 'auth'), namespace='auth')),
+	path('', include(router.urls)),
 ]

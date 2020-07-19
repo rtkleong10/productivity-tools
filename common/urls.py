@@ -1,6 +1,6 @@
 from django.urls import path, include
 from utils.routers import  DefaultRouterWithSimpleViews
-from .apis import ColorView, TimezoneView
+from .apis import ColorView, TimezoneView, HomeView
 from days_since.apis import ActivityViewSet, ActivityEventViewSet
 from time_cycles.apis import CycleViewSet, TimerViewSet
 
@@ -16,6 +16,8 @@ router.register(r'activities/(?P<activity>[^/.]+)/events', ActivityEventViewSet,
 router.register(r'cycles', CycleViewSet, basename='cycle')
 router.register(r'cycles/(?P<cycle>[^/.]+)/timers', TimerViewSet, basename='timer')
 
+app_name = 'common'
 urlpatterns = [
-    path('', include((router.urls, 'api'), namespace='api')),
+    path('api/', include(router.urls)),
+    path('', HomeView.as_view(), name='home'),
 ]
