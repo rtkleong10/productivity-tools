@@ -36,6 +36,12 @@ class TimerListSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 		read_only_fields = ('cycle',)
 
+class TimerMoveSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Timer
+		fields = '__all__'
+		read_only_fields = ('title', 'color', 'duration', 'cycle',)
+
 class TimerDetailSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Timer
