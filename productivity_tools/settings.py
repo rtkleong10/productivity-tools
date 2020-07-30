@@ -169,4 +169,5 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=2),
 }
 
-django_heroku.settings(locals())
+if DEBUG == False:
+    django_heroku.settings(locals())
