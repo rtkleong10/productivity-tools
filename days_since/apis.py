@@ -18,7 +18,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     - Frequency (in days) (optional)
     - Color (color refers to the id of the color in the colors list)
 
-    ## Additional Readonly Fields
+    ## Additional Read-only Fields
     - Today's event: The event type of today's event, if applicable (refer to the Event List for what each type stands for)
     - Last event type: The event type of the most recent event (refer to the Event List for what each type stands for)
     - Days since: Days since the last event or since creation if there's no events recorded
