@@ -9,6 +9,30 @@ from .models import Activity, ActivityEvent
 from .serializers import ActivityListSerializer, ActivityDetailSerializer, ActivityEventListSerializer, ActivityEventDetailSerializer, ActivityStatsSerializer
 
 class ActivityViewSet(viewsets.ModelViewSet):
+    """
+    An activity contain events which are when you perform that activity. Activities allow you to keep track of these related events and note how long it's been since the last event.
+
+    # Fields
+    - Title
+    - Description
+    - Frequency (in days) (optional)
+    - Color (color refers to the id of the color in the colors list)
+
+    ## Additional Readonly Fields
+    - Today's event: The event type of today's event, if applicable (refer to the Event List for what each type stands for)
+    - Last event type: The event type of the most recent event (refer to the Event List for what each type stands for)
+    - Days since: Days since the last event or since creation if there's no events recorded
+
+    # Statistics
+    - To get the statistics of a particular activity, go the activity page and use the extra action (Statistics)
+
+    ## Contains
+    - Total count
+    - Skipped count
+    - Completed count
+    - Average frequency (over the last 10 events)
+        - `null` if < 2 events recorded
+    """
     NUM_EVENTS_FOR_AVG_FREQ = 10
     permission_classes = [IsAuthenticated]
 
@@ -59,6 +83,18 @@ class ActivityViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class ActivityEventViewSet(viewsets.ModelViewSet):
+    """
+    An event is an instance of performing an activity. Events are linked to a date, so only 1 event can be performed per day per activity.
+
+    # Fields
+    - Date
+    - Event type
+    - Description
+
+    ## Event Types
+    - 1: Completed
+    - 2: Skipped
+    """
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
