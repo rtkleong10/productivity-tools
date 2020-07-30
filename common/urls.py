@@ -1,12 +1,12 @@
 from django.urls import path, include
 from utils.routers import  DefaultRouterWithSimpleViews
-from .apis import ColorView, TimezoneView, HomeView
+from .apis import ColorListView, TimezoneListView, HomeView
 from days_since.apis import ActivityViewSet, ActivityEventViewSet
 from time_cycles.apis import CycleViewSet, TimerViewSet
 
 router = DefaultRouterWithSimpleViews()
-router.register(r'colors', ColorView, basename='colors')
-router.register(r'timezones', TimezoneView, basename='timezones')
+router.register(r'colors', ColorListView, basename='colors')
+router.register(r'timezones', TimezoneListView, basename='timezones')
 
 # Days Since
 router.register(r'activities', ActivityViewSet, basename='activity')
