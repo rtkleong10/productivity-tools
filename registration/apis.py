@@ -8,6 +8,9 @@ from .serializers import ProfileSerializer
 from .models import UserProfile
 
 class ProfileView(generics.RetrieveUpdateAPIView):
+	"""
+	Lists the user settings
+	"""
 	permission_classes = [IsAuthenticated]
 	serializer_class = ProfileSerializer
 
@@ -16,6 +19,9 @@ class ProfileView(generics.RetrieveUpdateAPIView):
 		return UserProfile.objects.get(user=user)
 
 class LoginView(APIView):
+	"""
+	Allows you to login for session login. If you want to obtain the JWT, you need to use jwt/create.
+	"""
 	serializer_class = AuthTokenSerializer
 
 	def post(self, request):
@@ -33,6 +39,9 @@ class LoginView(APIView):
 		})
 
 class LogoutView(APIView):
+	"""
+	Allows you to logout from the session. You need to perform a POST request (can leave the body empty).
+	"""
 	permission_classes = [IsAuthenticated]
 
 	def post(self, request):
