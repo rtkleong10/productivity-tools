@@ -4,9 +4,15 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from .models import Cycle, Timer
 from rest_framework import serializers
-from .serializers import CycleListSerializer, CycleDetailSerializer, TimerListSerializer, TimerDetailSerializer
+from .serializers import CycleListSerializer, CycleDetailSerializer, TimerListSerializer, TimerDetailSerializer, TimerMoveSerializer
 
 class CycleViewSet(viewsets.ModelViewSet):
+	"""
+	A cycle is a sequence of timers.
+
+	# Fields
+	- Title
+	"""
 	permission_classes = [IsAuthenticated]
 
 	def get_queryset(self):
@@ -24,6 +30,18 @@ class CycleViewSet(viewsets.ModelViewSet):
 		serializer.save(user=user)
 
 class TimerViewSet(viewsets.ModelViewSet):
+	"""
+	Timers are used to represent timed tasks within a cycle. To reorder the timers,
+
+	# Fields
+	- Title
+	- Duration (format: `[DD] [[HH:]MM:]ss[.uuuuuu]`)
+	- Color (color refers to the id of the color in the colors list)
+
+	# Reordering Timers
+	- Use the extra actions (move down & move up) in the detail page
+	- Need to do a POST request (can leave the body empty)
+	"""
 	permission_classes = [IsAuthenticated]
 
 	def get_queryset(self):
@@ -32,8 +50,10 @@ class TimerViewSet(viewsets.ModelViewSet):
 		return Timer.objects.filter(cycle=cycle).order_by('order')
 
 	def get_serializer_class(self):
-		if self.action in ['list', 'move_up', 'move_down']:
+		if self.action == 'list':
 			return TimerListSerializer
+		elif self.action in ['move_up', 'move_down']:
+			return TimerMoveSerializer
 		else:
 			return TimerDetailSerializer
 

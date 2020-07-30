@@ -7,11 +7,17 @@ from rest_framework.response import Response
 from common.serializers import ColorSerializer
 from common.models import Color
 
-class ColorView(generics.ListAPIView):
+class ColorListView(generics.ListAPIView):
+	"""
+	List of all the colors
+	"""
 	queryset = Color.objects.order_by("id")
 	serializer_class = ColorSerializer
 
-class TimezoneView(views.APIView):
+class TimezoneListView(views.APIView):
+	"""
+	List of all the possible timezones
+	"""
 	def get(self, request):
 		return Response(pytz.all_timezones)
 
