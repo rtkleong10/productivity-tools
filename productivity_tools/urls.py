@@ -21,7 +21,7 @@ admin.site.site_header = "Productivity Tools Admin Panel"
 admin.site.site_title = "Productivity Tools Admin Panel"
 admin.site.index_title = "Welcome to the Productivity Tools Admin Panel"
 
-favicon_view = RedirectView.as_view(url='/static/images/favicon/favicon.ico/', permanent=True)
+favicon_view = RedirectView.as_view(url='/static/images/favicon/favicon.ico', permanent=True)
 
 urlpatterns = [
     path('favicon.ico/', favicon_view),
