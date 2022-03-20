@@ -1,13 +1,13 @@
 asgiref==3.2.7
 dj-database-url==0.5.0
-Django==3.0.7
+Django==3.1.13
 django-colorfield==0.3.0
 django-cors-headers==3.3.0
 django-heroku==0.3.1
 django-ordered-model==3.4.1
 django-templated-mail==1.1.1
 django-timezone-field==4.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-simplejwt==4.4.0
 djoser==2.0.3
 gunicorn==20.0.4
@@ -17,5 +17,6 @@ psycopg2==2.8.5
 PyJWT==1.7.1
 pytz==2019.3
 sqlparse==0.3.1
+typing-extensions==4.1.1
 whitenoise==5.0.1
 zipp==3.1.0
