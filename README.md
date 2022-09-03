@@ -3,9 +3,8 @@
 - I created these tools because I was unable to find similar tools online
 - This repository contains the backend server for Productivity Tools
     - It uses Django Rest Framework and has a browsable API
-- You can view it live [here](https://rtkleong10-productivity-tools.herokuapp.com/)
-    - The server is hosted using Heroku
-    - It make take some time to load initially as Heroku lets the server sleep if it's not in use for some time
+- You can view it live [here](https://rtkleong10-productivity-tools.fly.dev/)
+    - The server is hosted using fly.io
 - It provides API endpoints for the [frontend web app](https://github.com/rtkleong10/productivity-tools-web/)
 
 
