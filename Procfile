@@ -1,1 +1,0 @@
-web: gunicorn productivity_tools.wsgi
